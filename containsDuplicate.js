@@ -13,25 +13,26 @@ var containsDuplicate = function(nums) {
     return false;
 };
 
-const swap = (items, leftIndex, rightIndex) => {
-    let temp = items[leftIndex];
+function swap(items, leftIndex, rightIndex){
+    var temp = items[leftIndex];
     items[leftIndex] = items[rightIndex];
     items[rightIndex] = temp;
 }
+const partition = (arr, left, right) => {
+    let pivot = arr[Math.floor((left+right)/2)];
+    let i = left;
+    let j = right;
 
-const partition = (items, left, right) => {
-    let pivot   = items[Math.floor((right + left) / 2)], //middle element
-        i       = left, //left pointer
-        j       = right; //right pointer
-    while (i <= j) {
-        while (items[i] < pivot) {
+    while(i <= j) {
+        while(arr[i] < pivot) {
             i++;
         }
-        while (items[j] > pivot) {
+
+        while(arr[j] > pivot) {
             j--;
         }
-        if (i <= j) {
-            swap(items, i, j); //sawpping two elements
+        if(i <= j) {
+            swap(arr, i,j);
             i++;
             j--;
         }
@@ -39,18 +40,16 @@ const partition = (items, left, right) => {
     return i;
 }
 
-const quickSort = (arr, left, right) => {
-    if(arr.length > 1) {
-        let index = partition(arr, left, right);
-
-        if(left < index - 1) {
-            quickSort(arr, left, index - 1);
+function quickSort(items, left, right) {
+    var index;
+    if (items.length > 1) {
+        index = partition(items, left, right); //index returned from partition
+        if (left < index - 1) { //more elements on the left side of the pivot
+            quickSort(items, left, index - 1);
         }
-
-        if(index > right) {
-            quickSort(arr, index, right);
+        if (index < right) { //more elements on the right side of the pivot
+            quickSort(items, index, right);
         }
     }
-
-    return arr
+    return items;
 }
