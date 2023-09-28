@@ -3,7 +3,11 @@
  * @return {boolean}
  */
 var isPalindrome = function(s) {
-    const sReverse = s.split("").reverse().join("").toLowerCase().replace(/\s/g, '').replace(/[^0-9a-z]/gi, '');
-    const sFiltered = s.toLowerCase().replace(/\s/g, '').replace(/[^0-9a-z]/gi, '')
-    return sFiltered === sReverse ? true: false
+    const sArr = s.replace(/[^0-9a-z]/gi, '').toLowerCase().split("")
+    for(let i=0;i<sArr.length;i++) {
+        const reverseCurrPos = [sArr.length - 1 - i];
+        if(sArr[reverseCurrPos] !== sArr[i])
+            return false
+    }
+    return true
 };
