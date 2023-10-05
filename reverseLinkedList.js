@@ -11,10 +11,10 @@
  */
 
 // recursive
-var reverseList = function(head) {
+const reverseListRecursive = function(head) {
     if (head == null || head.next == null) return head;
 
-    const result = reverseList(head.next);
+    const result = reverseListRecursive(head.next);
     head.next.next = head;
     head.next = null;
     return result;
@@ -27,6 +27,23 @@ class ListNode {
     }
 }
 
+// iterative
+const reverseListIterator = function(head) {
+    let prev = null;
+    let curr = head;
+    let next;
+
+    // null->1->2->3->4->null
+    while(curr) {
+        next = curr.next;
+        curr.next = prev; // null
+        prev = curr; // 1
+
+        curr = next; // null
+    }
+}
+
+
 let node1 = new ListNode(1)
 let node2 = new ListNode(2)
 let node3 = new ListNode(3)
@@ -37,13 +54,13 @@ let node7 = new ListNode(7)
 let node8 = new ListNode(8)
 let node9 = new ListNode(9)
 node1.next = node2
-node2.next = node3
+/*node2.next = node3
 node3.next = node4
 node4.next = node5
 node5.next = node6
 node6.next = node7
 node7.next = node8
-node8.next = node9
+node8.next = node9*/
 
-const answer = reverseList(node1)
+const answer = reverseListRecursive(node1)
 console.log(answer)
