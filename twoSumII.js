@@ -15,5 +15,3 @@ var twoSum = function(numbers, target) {
             return [i+1, j+1]
     }
 };
-
-twoSum([1,4,5,6,7], 7)
